@@ -2,22 +2,22 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="mainLayout" template="classpath:WEB-INF/jsp/main/home.jsp">
-		<put-attribute name="header" value="classpath:WEB-INF/jsp/main/header.jsp">
+	<definition name="mainLayout" template="/WEB-INF/jsp/main/home.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/main/header.jsp">
 
 		</put-attribute>
-		<put-attribute name="footer" value="classpath:WEB-INF/jsp/main/footer.jsp">
+		<put-attribute name="footer" value="/WEB-INF/jsp/main/footer.jsp">
 		</put-attribute>
 		
 	</definition>
-	<definition name="mainAreaLayout" template="classpath:WEB-INF/jsp/main/mainArea.jsp">
-		<put-attribute name="header" value="classpath:WEB-INF/jsp/main/header.jsp">
+	<definition name="mainAreaLayout" template="/WEB-INF/jsp/main/mainArea.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/main/header.jsp">
 
 		</put-attribute>
-		<put-attribute name="left" value="classpath:WEB-INF/jsp/main/left.jsp">
+		<put-attribute name="left" value="/WEB-INF/jsp/main/left.jsp">
 
 		</put-attribute>
-		<put-attribute name="footer" value="classpath:WEB-INF/jsp/main/footer.jsp">
+		<put-attribute name="footer" value="/WEB-INF/jsp/main/footer.jsp">
 		</put-attribute>
 		
 		
@@ -25,23 +25,23 @@
 	
 	
 	<definition name="contents/*" extends="mainAreaLayout">
-		<put-attribute name="contents" value="classpath:WEB-INF/jsp/contents/{1}.jsp">
+		<put-attribute name="contents" value="/WEB-INF/jsp/contents/{1}.jsp">
 		
 		</put-attribute>
 		
 	</definition>
 	<definition name="manage/*" extends="mainAreaLayout">
-		<put-attribute name="contents" value="classpath:WEB-INF/jsp/manage/{1}.jsp">
+		<put-attribute name="contents" value="/WEB-INF/jsp/manage/{1}.jsp">
 		
 		</put-attribute>
 		
 	</definition>
 	<definition name="main/home" extends="mainAreaLayout">
-		<put-attribute name="contents" value="classpath:WEB-INF/jsp/main/default.jsp">
+		<put-attribute name="contents" value="/WEB-INF/jsp/main/default.jsp">
 		
 		</put-attribute>
 	</definition>
-	<definition name="div/*" template="classpath:WEB-INF/jsp/contents/{1}.jsp">
+	<definition name="div/*" template="/WEB-INF/jsp/contents/{1}.jsp">
 		
 	</definition>
 	

@@ -10,7 +10,7 @@ public class ShoppingmallConfigurer implements WebMvcConfigurer {
 
 	public void addViewControllers(ViewControllerRegistry registry) {
 
-		registry.addViewController("/").setViewName("main/home");
+		registry.addViewController("/").setViewName("forward:/index.do");
 
 	}
 }
