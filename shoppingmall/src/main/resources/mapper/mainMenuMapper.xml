@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhee.shoppingmall.admin.MainMenuMapper">
+	<select id="getMainMenu" resultType="com.rhee.shoppingmall.admin.MainMenuVO">
+		select * from main_menu where menu_level=0 order by menu_id
+	</select>
+	
+	
+	<select id="getSubMenu"
+		resultType="com.rhee.shoppingmall.admin.MainMenuVO"
+		parameterType="java.lang.String">
+		select * from main_menu start with parent_menu_id='0000' and menu_url=#{value} connect by prior menu_id=parent_menu_id
+		order by menu_id
+	</select>
+	
+	<select id="getMenuLevel"
+		resultType="int"
+		parameterType="java.lang.String">
+		select menu_level from main_menu where menu_url=#{value} 
+	</select>
+	<select id="countMenu"
+		resultType="int"
+		parameterType="java.lang.String">
+		select count(*) from main_menu where menu_url=#{value} 
+	</select>
+</mapper>

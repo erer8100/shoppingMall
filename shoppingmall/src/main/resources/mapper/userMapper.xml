@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhee.shoppingmall.user.UserMapper">
+	<select id="getProductInfo" parameterType="java.lang.String" resultType="com.rhee.shoppingmall.admin.ProductInfoVO">
+		select 
+			product_id,
+			image_url,
+			name,
+			price
+		from product_vw 
+		<if test="value !=null and value!=''">
+			where name like '%' || #{value} || '%'
+		</if>
+		
+	</select>
+
+
+	<select id="getProductInfoById" parameterType="java.lang.String" resultType="com.rhee.shoppingmall.admin.ProductInfoVO">
+		select 
+			product_id,
+			image_url,
+			name,
+			price,
+			product_desc
+		from product_vw 
+		
+		where product_id = #{value}
+		
+		
+	</select>
+	<select id="getCartDetailByCartId" parameterType="java.lang.String" resultType="com.rhee.shoppingmall.user.CartDetailVO">
+		select 
+			b.name,
+			b.price,
+			a.product_count,
+			b.price*a.product_count as amount
+		from cart_detail_vw a, 
+		     product_vw b
+		where 1=1 
+		and   b.product_id=a.product_id
+		and   a.cart_id = #{value}
+		
+		
+	</select>
+	
+	<select id="getCartIdByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+		select 
+			id
+			
+		from cart_vw
+		where 1=1 
+		and   user_id = #{value}
+		
+		
+	</select>
+	
+	<update id="insertCartDetail" parameterType="java.util.Map">
+		insert into cart_detail (
+			ID,
+			CART_ID,
+			PRODUCT_ID,
+			PRODUCT_COUNT,
+			REG_TIME
+		
+		) values (
+			#{id},
+			#{cartId},
+			#{productId},
+			#{productCount},
+			SYSDATE
+		)
+	</update>
+	<insert id="insertCart" parameterType="java.util.Map">
+		insert into cart (
+			ID,
+			USER_ID,
+			REG_TIME,
+			STATUS
+			
+		
+		) values (
+			#{id},
+			#{userId},
+			SYSDATE,
+			#{status}
+		)
+					
+				
+	</insert>
+	<select id="maxCartReg" parameterType="java.lang.String"
+		resultType="int">
+		select to_number(NVL(substr(max(id), 9), '0')) from cart_vw where id like #{value} || '%'
+		
+	</select>
+	<select id="maxCartDetailReg" parameterType="java.lang.String"
+		resultType="int">
+		select to_number(NVL(max(id), '0')) from cart_detail_vw where cart_id = #{value}	
+	</select>
+</mapper>

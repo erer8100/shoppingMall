@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhee.shoppingmall.util.CommonMapper">
+	<select id="getMenuInfo" parameterType="java.lang.String" resultType="com.rhee.shoppingmall.user.MenuVO">
+		select menu_id, menu_name, menu_field from menu_detail where id=#{value} order by menu_id
+	</select>
+	<select id="getMenuId" parameterType="java.lang.String" resultType="java.lang.String">
+		select id from menu where screen_name=#{value}
+	</select>
+	<select id="getUrlList" parameterType="java.lang.String" resultType="java.util.Map">
+		select NVL(directory, '') || end_url as url, id from url_list where id in (select url_id from screen_url_detail where screen_id=(select id from menu where screen_name=#{value}))
+		
+	</select>
+	<select id="getAllUrlList" resultType="java.util.Map">
+		select NVL(directory, '') || end_url as url, id from url_list
+		
+	</select>
+	<select id="getMenuList" parameterType="java.lang.String" resultType="com.rhee.shoppingmall.user.MenuVO">
+		select menu_id, menu_name, menu_field from menu_detail where id=(select id from menu where screen_name=#{value}) order by menu_id
+	</select>
+</mapper>

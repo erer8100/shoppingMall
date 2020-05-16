@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rhee.shoppingmall.login.LoginMapper">
+	<select id="getLoginInfo" resultType="com.rhee.shoppingmall.login.UserDetailVO" parameterType="java.lang.String">
+		select * from membership_vw where user_id=#{username}
+	</select>
+	<insert id="insertMemberInfo" parameterType="com.rhee.shoppingmall.login.UserDetailVO">
+		insert into membership( user_id, password, user_role,
+		<if test="userName!='' and userName!=null">user_name,</if>
+		<if test="emailAddr!='' and emailAddr!=null">email_addr,</if>
+		<if test="telNo!='' and telNo!=null">tel_no,</if>
+		<if test="addr!='' and addr!=null">addr</if>
+
+		) values ( #{userId}, #{password}, #{userRole},
+		<if test="userName!='' and userName!=null">
+			#{userName},
+
+		</if>
+		<if test="emailAddr!='' and emailAddr!=null">
+			#{emailAddr},
+
+		</if>
+		<if test="telNo!='' and telNo!=null">
+			#{telNo},
+
+		</if>
+		<if test="addr!='' and addr!=null">
+			#{addr}
+
+		</if>
+		)
+	</insert>
+	<select id="countMember" parameterType="java.lang.String" resultType="int">
+		select COUNT(*) from membership_vw where user_id=#{userId}
+	</select>
+
+</mapper>
