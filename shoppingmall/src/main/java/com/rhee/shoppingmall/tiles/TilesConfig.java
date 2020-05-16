@@ -13,7 +13,7 @@ public class TilesConfig {
 	public TilesConfigurer TilesConfigur() {
 		final TilesConfigurer configurer =new TilesConfigurer();
 		
-		String[] definition={"WEB-INF/tiles/mainLayout.xml"};
+		String[] definition={"classpath:WEB-INF/tiles/mainLayout.xml"};
 		configurer.setDefinitions(definition);
 		configurer.setCheckRefresh(true);
 		
